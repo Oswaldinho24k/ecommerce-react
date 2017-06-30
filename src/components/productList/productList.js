@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Row, Col , Card} from 'antd';
+import { Row, Col } from 'antd';
 import ProductCard from './productCard';
 import {Link} from 'react-router-dom';
 import firebase from '../../firebase';
@@ -36,6 +36,7 @@ class ProductList extends Component{
   }
 
   componentWillMount(){
+
     firebase.database().ref('productos')
     .once('value', (res)=>{
       let obj = res.val();
@@ -48,6 +49,7 @@ class ProductList extends Component{
       this.setState({productos:array});
     });
   }
+
 
   render(){
     return(

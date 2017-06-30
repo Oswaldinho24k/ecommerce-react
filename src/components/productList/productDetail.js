@@ -1,5 +1,5 @@
 import React, { Component} from 'react'
-import { Row, Col , Card} from 'antd';
+import { Row, Col , Card, Button, message} from 'antd';
 import firebase from '../../firebase';
 
 class  ProductDetail extends Component {
@@ -14,6 +14,17 @@ class  ProductDetail extends Component {
     .on('value', (snap)=>{
       this.setState({producto:snap.val()})
     });
+
+  }
+  addCart=()=>{
+    let user = firebase.auth().currentUser;
+
+    firebase.database().ref('cart/'+user.uid).push({
+      cantidad:1,
+      producto:this.state.producto
+    })
+      message.success('Se agregó al carrito')
+    
   }
 
   render () {
@@ -24,7 +35,8 @@ class  ProductDetail extends Component {
           <Col span={12}>
             <Card title={producto.nombre} bordered={false} style={{ width: 300 }}>
               <p>{producto.desc}</p>
-              
+              <Button onClick={this.addCart}>Agregar al Carrito</Button>
+
             </Card>
           </Col>
           <Col span={12}>
@@ -32,8 +44,8 @@ class  ProductDetail extends Component {
                 <div className="custom-image">
                   <img alt="example" width="100%" src={producto.img} />
                 </div>
-                <h4>{producto.price}</h4> 
-                
+                <h4>{producto.price}</h4>
+
               </Card>
           </Col>
         </Row>
