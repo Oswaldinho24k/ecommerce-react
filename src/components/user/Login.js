@@ -20,7 +20,7 @@ logIn=()=>{
         photoUrl:result.user.photoURL
       })
       message.success('Bienvenido '+result.user.displayName)
-      
+
   })
 }
 

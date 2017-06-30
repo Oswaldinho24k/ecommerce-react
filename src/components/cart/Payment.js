@@ -47,7 +47,7 @@ class Payment extends Component{
   				    <Button
   				    	type="primary"
   				    	onClick={this.onPay}
-  				    >Guardar</Button>
+  				    >Pagar</Button>
   					</form>
       </Card>
 
